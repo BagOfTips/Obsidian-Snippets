@@ -1,0 +1,149 @@
+/*
+ * Text Tweaks
+ * Controls note-text spacing, heading gaps, and italic text colour.
+ * Works in Reading view, Live Preview, and Source mode.
+ */
+
+/* @settings
+
+name: Text Tweaks
+id: text-tweaks
+settings:
+  -
+    id: text-tweaks-line-height
+    title: Line spacing
+    description: The height of each line relative to the text size.
+    type: variable-number-slider
+    default: 1.5
+    min: 1
+    max: 3
+    step: 0.05
+  -
+    id: text-tweaks-heading-space-above
+    title: Gap before headings
+    description: Space between the preceding text and a heading. Reduce this value for a tighter layout.
+    type: variable-number-slider
+    default: 24
+    min: 0
+    max: 100
+    step: 1
+    format: px
+  -
+    id: text-tweaks-heading-space-below
+    title: Gap after headings
+    description: Space between a heading and the following text. Reduce this value for a tighter layout.
+    type: variable-number-slider
+    default: 12
+    min: -50
+    max: 100
+    step: 1
+    format: px
+  -
+    id: text-tweaks-italic-text-color
+    title: Italic text colour
+    description: Colour used for italic text in notes.
+    type: variable-color
+    format: hex
+    default: '#c792ea'
+  -
+    id: text-tweaks-list-space-before
+    title: Gap before lists
+    description: Space between preceding text and the first item in a list.
+    type: variable-number-slider
+    default: 8
+    min: 0
+    max: 100
+    step: 1
+    format: px
+  -
+    id: text-tweaks-list-space-after
+    title: Gap after lists
+    description: Space between the final item in a list and the text that follows it.
+    type: variable-number-slider
+    default: 8
+    min: 0
+    max: 100
+    step: 1
+    format: px
+
+*/
+
+body {
+  --text-tweaks-line-height: 1.5;
+  --text-tweaks-heading-space-above: 24px;
+  --text-tweaks-heading-space-below: 12px;
+  --text-tweaks-italic-text-color: #c792ea;
+  --text-tweaks-list-space-before: 8px;
+  --text-tweaks-list-space-after: 8px;
+}
+
+/* Limit the setting to note text so the rest of Obsidian's interface is unchanged. */
+:is(.markdown-source-view, .markdown-preview-view) {
+  --line-height-normal: var(--text-tweaks-line-height);
+}
+
+.markdown-rendered,
+.markdown-source-view.mod-cm6 .cm-line {
+  line-height: var(--text-tweaks-line-height);
+}
+
+/* Heading-to-text spacing in Reading view. */
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) {
+  margin-block-start: var(--text-tweaks-heading-space-above);
+  margin-block-end: var(--text-tweaks-heading-space-below);
+}
+
+/* CodeMirror lines cannot use margins reliably, so the editor uses padding. */
+.markdown-source-view.mod-cm6 .cm-line:is(
+    .HyperMD-header-1,
+    .HyperMD-header-2,
+    .HyperMD-header-3,
+    .HyperMD-header-4,
+    .HyperMD-header-5,
+    .HyperMD-header-6
+  ) {
+  padding-block-start: var(--text-tweaks-heading-space-above);
+  padding-block-end: max(0px, var(--text-tweaks-heading-space-below));
+  margin-block-end: min(0px, var(--text-tweaks-heading-space-below));
+}
+
+/* Italic text in Reading view and the editor. */
+.markdown-rendered :is(em, i),
+.markdown-source-view.mod-cm6 .cm-em {
+  color: var(--text-tweaks-italic-text-color);
+}
+
+/* Space between surrounding text and lists in Reading view. */
+.markdown-rendered :is(ul, ol) {
+  margin-block-start: var(--text-tweaks-list-space-before);
+  margin-block-end: var(--text-tweaks-list-space-after);
+}
+
+/* Remove paragraph spacing that would otherwise override the chosen list gap. */
+.markdown-rendered p:has(+ :is(ul, ol)),
+.markdown-rendered :is(.el-p:has(+ .el-ul), .el-p:has(+ .el-ol)) > p {
+  margin-block-end: 0;
+}
+
+.markdown-rendered :is(ul, ol):has(+ p),
+.markdown-rendered :is(.el-ul:has(+ .el-p), .el-ol:has(+ .el-p)) > :is(ul, ol) {
+  margin-block-end: var(--text-tweaks-list-space-after);
+}
+
+/* Add space only at the beginning and end of a list in the editor. */
+.markdown-source-view.mod-cm6
+  .cm-line:not(.HyperMD-list-line)
+  + .cm-line.HyperMD-list-line {
+  padding-block-start: var(--text-tweaks-list-space-before);
+}
+
+.markdown-source-view.mod-cm6
+  .cm-line.HyperMD-list-line:has(+ .cm-line:not(.HyperMD-list-line)) {
+  padding-block-end: var(--text-tweaks-list-space-after);
+}
+
+/* A Markdown blank line before a list is represented as its own editor line. */
+.markdown-source-view.mod-cm6
+  .cm-line:has(> br:only-child):has(+ .cm-line.HyperMD-list-line) {
+  line-height: var(--text-tweaks-list-space-before);
+}

@@ -1,0 +1,14 @@
+/*
+ * Hide the Obsidian Bases UI for selected embeds.
+ *
+ * Use this alias when embedding a Base:
+ * ![[Party.base|no-ui]]
+ */
+
+.bases-embed[alt~="no-ui"] .bases-header {
+  display: none;
+}
+
+.bases-embed[alt~="no-ui"] .property-matrix-summary {
+  display: none;
+}
