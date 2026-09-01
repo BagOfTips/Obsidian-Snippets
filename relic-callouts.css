@@ -1,0 +1,1321 @@
+/*
+ * Relic Callouts: dark fantasy with an Art Deco edge.
+ * Callout types: Edict, Infobox, and Advice.
+ *
+ * Edict example:
+ * > [!edict] The Black Oath
+ * > What is sealed in shadow must remain unnamed.
+ *
+ * All three callouts support Obsidian's foldable + and - variants.
+ * A nested Gallery receives a compact integration style inside an Infobox.
+ * Reference Images provides optional left- and right-floating artwork.
+ */
+
+.callout[data-callout="edict"] {
+  --callout-color: 183, 146, 72;
+  --callout-icon: lucide-crown;
+  --eldritch-gold: #b79248;
+  --eldritch-gold-bright: #dfc27a;
+  --eldritch-ink: #09080d;
+  --eldritch-shadow: #171511;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-block: 1.25em;
+  padding: 0;
+  color: #ddd4c2;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(183, 146, 72, 0.09), transparent 58%),
+    linear-gradient(155deg, rgba(25, 23, 19, 0.97), rgba(9, 8, 10, 0.98) 68%);
+  border: 1px solid rgba(183, 146, 72, 0.56);
+  border-left-width: 1px;
+  border-radius: 30px 30px 12px 12px;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.38),
+    inset 0 0 28px rgba(183, 146, 72, 0.035);
+}
+
+/* A simple inner arch echoes gilded 1920s theatre and tarot frames. */
+.callout[data-callout="edict"]::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 6px;
+  pointer-events: none;
+  border: 1px solid rgba(223, 194, 122, 0.3);
+  border-radius: 24px 24px 7px 7px;
+  opacity: 0.8;
+}
+
+/* The fold control is positioned here instead; no separate foot ornament. */
+.callout[data-callout="edict"]::after {
+  content: none;
+}
+
+.callout[data-callout="edict"] > .callout-title {
+  position: static;
+  gap: 0.7em;
+  min-height: 2.8em;
+  padding: 0.85em 1.2em 0.75em;
+  color: var(--eldritch-gold-bright);
+  background: transparent;
+  border-bottom: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.04em;
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+/* A slender, tapered Art Deco rule below the title. */
+.callout[data-callout="edict"] > .callout-title::after {
+  content: "";
+  position: absolute;
+  right: 1.6em;
+  top: 2.8em;
+  left: 1.6em;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--eldritch-gold) 18%, var(--eldritch-gold-bright) 50%, var(--eldritch-gold) 82%, transparent);
+  opacity: 0.62;
+}
+
+.callout[data-callout="edict"] .callout-icon {
+  display: none;
+}
+
+.callout[data-callout="edict"] .callout-fold {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 2px;
+  display: grid;
+  place-items: center;
+  width: 2.6em;
+  height: 12px;
+  margin: 0;
+  padding: 0;
+  color: var(--eldritch-gold-bright);
+  background: #0b0a0a;
+  transform: translateX(-50%);
+  transition: color 160ms ease, text-shadow 160ms ease;
+}
+
+.callout[data-callout="edict"] .callout-fold svg {
+  display: none;
+}
+
+/* Open callout: upward chevron at the centre of the lower frame. */
+.callout[data-callout="edict"] .callout-fold::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(2px) rotate(225deg);
+}
+
+/* Closed callout: downward chevron. */
+.callout[data-callout="edict"].is-collapsed .callout-fold::after {
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.callout[data-callout="edict"] .callout-title:hover .callout-fold {
+  color: var(--eldritch-gold-bright);
+  text-shadow: 0 0 8px rgba(223, 194, 122, 0.65);
+}
+
+.callout[data-callout="edict"] > .callout-content {
+  padding: 0.9em 1.25em 1.1em;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.65;
+}
+
+.callout[data-callout="edict"] > .callout-content p:first-child {
+  margin-top: 0;
+}
+
+.callout[data-callout="edict"] > .callout-content p:last-child {
+  margin-bottom: 0;
+}
+
+.callout[data-callout="edict"] strong {
+  color: #e4c984;
+}
+
+.callout[data-callout="edict"] a {
+  color: #c9a85c;
+  text-decoration-color: rgba(201, 168, 92, 0.5);
+}
+
+/* A restrained version for narrow panes and mobile. */
+@media (max-width: 500px) {
+  .callout[data-callout="edict"] > .callout-title {
+    padding-inline: 0.9em;
+    font-size: 0.98em;
+    letter-spacing: 0.1em;
+  }
+
+  .callout[data-callout="edict"] > .callout-content {
+    padding-inline: 1em;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .callout[data-callout="edict"] {
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .callout[data-callout="edict"]:hover {
+    border-color: rgba(223, 194, 122, 0.92);
+    box-shadow:
+      0 14px 34px rgba(0, 0, 0, 0.46),
+      0 0 20px rgba(183, 146, 72, 0.08),
+      inset 0 0 30px rgba(183, 146, 72, 0.05);
+  }
+}
+
+/* Collapsed Infobox becomes a small clickable information badge. */
+html body .callout[data-callout="infobox"].is-collapsed {
+  --callout-icon: lucide-info;
+  width: 38px !important;
+  min-width: 38px;
+  height: 38px;
+  min-height: 38px;
+  margin-left: 12px;
+  border-radius: 50%;
+  background: #11100f !important;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 3px rgba(8, 8, 9, 0.55);
+}
+
+html body .callout[data-callout="infobox"].is-collapsed > .callout-title {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+  cursor: pointer;
+}
+
+html body .callout[data-callout="infobox"].is-collapsed > .callout-title .callout-title-inner,
+html body .callout[data-callout="infobox"].is-collapsed > .callout-title .callout-fold {
+  display: none;
+}
+
+html body .callout[data-callout="infobox"].is-collapsed > .callout-title .callout-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  color: #dfc27a;
+  transform: translate(-50%, -50%);
+}
+
+html body .callout[data-callout="infobox"].is-collapsed > .callout-title .callout-icon svg {
+  display: none;
+}
+
+html body .callout[data-callout="infobox"].is-collapsed > .callout-title .callout-icon::before,
+html body .callout[data-callout="infobox"].is-collapsed > .callout-title .callout-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  display: block;
+  width: 3px;
+  background: #dfc27a;
+  transform: translateX(-50%);
+  box-shadow: 0 0 5px rgba(223, 194, 122, 0.28);
+}
+
+html body .callout[data-callout="infobox"].is-collapsed > .callout-title .callout-icon::before {
+  top: 3px;
+  height: 3px;
+  border-radius: 50%;
+}
+
+html body .callout[data-callout="infobox"].is-collapsed > .callout-title .callout-icon::after {
+  top: 8px;
+  height: 9px;
+  border-radius: 2px;
+}
+
+/* Remove paragraph and inline-baseline gaps around top-level Infobox media. */
+html body .callout[data-callout="infobox"] > .callout-content > p:has(> img),
+html body .callout[data-callout="infobox"] > .callout-content > p:has(> audio),
+html body .callout[data-callout="infobox"] > .callout-content > p:has(> .internal-embed.image-embed),
+html body .callout[data-callout="infobox"] > .callout-content > p:has(> .internal-embed.media-embed),
+html body .callout[data-callout="infobox"] > .callout-content > p:has(audio) {
+  margin-block: 0 !important;
+  padding-block: 0 !important;
+}
+
+html body .callout[data-callout="infobox"] > .callout-content :is(.internal-embed.image-embed, .internal-embed.media-embed),
+html body .callout[data-callout="infobox"] > .callout-content audio {
+  display: block;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0;
+  vertical-align: top;
+}
+
+html body .callout[data-callout="infobox"] > .callout-content audio {
+  max-width: none;
+}
+
+/* Keep native audio controls above Infobox paint and media wrappers. */
+html body .callout[data-callout="infobox"] > .callout-content > p:has(audio),
+html body .callout[data-callout="infobox"] > .callout-content .internal-embed.media-embed,
+html body .callout[data-callout="infobox"] > .callout-content audio {
+  position: relative;
+  z-index: 6;
+  pointer-events: auto !important;
+}
+
+/* Meta Bind renderMarkdown views retain an inline line box below images. */
+html body .callout[data-callout="infobox"] > .callout-content > p:has(.mb-view img),
+html body .callout[data-callout="infobox"] > .callout-content > p:has(.meta-bind-view img),
+html body .callout[data-callout="infobox"] > .callout-content > p:has([class*="meta-bind-view"] img) {
+  margin-block: 0 !important;
+  padding-block: 0 !important;
+}
+
+html body .callout[data-callout="infobox"] > .callout-content
+  :is(.mb-view, .mb-view-content, .meta-bind-view, [class*="meta-bind-view"]):has(img),
+html body .callout[data-callout="infobox"] > .callout-content
+  :is(.mb-view, .mb-view-content, .meta-bind-view, [class*="meta-bind-view"]) :is(span, div):has(img) {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  vertical-align: bottom !important;
+}
+
+html body .callout[data-callout="infobox"] > .callout-content
+  :is(.mb-view, .mb-view-content, .meta-bind-view, [class*="meta-bind-view"]):has(img) br {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+}
+
+/* Remove paragraph/baseline gaps around Inline Voice Recorder controls. */
+html body .callout[data-callout="infobox"] > .callout-content > p:has(.inline-voice-recorder-button),
+html body .callout[data-callout="infobox"] > .callout-content > p:has(a[href^="voice-recorder"]) {
+  margin-block: 0 !important;
+  padding-block: 0 !important;
+}
+
+html body .callout[data-callout="infobox"] .inline-voice-recorder-button,
+html body .markdown-source-view.mod-cm6 .callout[data-callout="infobox"] a[href^="voice-recorder"] {
+  position: relative;
+  z-index: 5;
+  margin-block: 0 !important;
+  pointer-events: auto !important;
+  vertical-align: top;
+}
+
+/* Long Infobox lists remain selectable, copyable, and link-interactive. */
+html body .callout[data-callout="infobox"] > .callout-content,
+html body .callout[data-callout="infobox"] table,
+html body .callout[data-callout="infobox"] :is(tbody, tr, th, td, p, ul, ol, li) {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+html body .callout[data-callout="infobox"] table :is(th, td) {
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: clip !important;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+html body .callout[data-callout="infobox"] table :is(ul, ol) {
+  max-width: 100%;
+  overflow: visible !important;
+}
+
+html body .callout[data-callout="infobox"] table a,
+html body .callout[data-callout="infobox"] table .internal-link,
+html body .callout[data-callout="infobox"] table .external-link {
+  position: relative;
+  z-index: 8;
+  pointer-events: auto !important;
+  cursor: pointer;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Keep information rows above invisible media/Meta Bind wrapper bounds. */
+html body .callout[data-callout="infobox"] > .callout-content > table {
+  position: relative;
+  z-index: 20;
+  isolation: isolate;
+  pointer-events: auto !important;
+}
+
+html body .callout[data-callout="infobox"] > .callout-content > table :is(tbody, tr, th, td, p, ul, ol, li, span, a) {
+  pointer-events: auto;
+}
+
+/* --------------------------------------------------------------------------
+ * Relic: Infobox
+ * Use with: > [!infobox] Title
+ * ----------------------------------------------------------------------- */
+
+/* @settings
+
+name: Relic Callouts
+id: relic-callouts
+settings:
+  -
+    id: relic-infobox-layout
+    title: Infobox
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: relic-infobox-width
+    title: Infobox width
+    type: variable-number
+    default: 300
+    format: px
+  -
+    id: relic-infobox-radius
+    title: Corner radius
+    type: variable-number
+    default: 14
+    format: px
+  -
+    id: relic-infobox-border-color
+    title: Border colour
+    type: variable-color
+    format: hex
+    default: '#b79248'
+  -
+    id: relic-infobox-body
+    title: Body and rows
+    type: heading
+    level: 2
+    collapsed: true
+  -
+    id: relic-infobox-font-size
+    title: Body text size
+    type: variable-number
+    default: 13
+    format: px
+  -
+    id: relic-infobox-row-padding
+    title: Row vertical padding
+    type: variable-number
+    default: 5
+    format: px
+  -
+    id: relic-infobox-text-color
+    title: Body text colour
+    type: variable-color
+    format: hex
+    default: '#ddd4c2'
+  -
+    id: relic-infobox-caption-color
+    title: Caption text
+    type: variable-color
+    format: hex
+    default: '#b9a982'
+  -
+    id: relic-infobox-headers
+    title: Headers
+    type: heading
+    level: 2
+    collapsed: true
+  -
+    id: relic-infobox-header-font-family
+    title: Header font family
+    description: Applies only to the main title and section headers.
+    type: variable-text
+    default: 'Georgia, "Times New Roman", serif'
+  -
+    id: relic-infobox-title-size
+    title: Main title size
+    type: variable-number
+    default: 18
+    format: px
+  -
+    id: relic-infobox-section-size
+    title: Section heading size
+    type: variable-number
+    default: 14
+    format: px
+  -
+    id: relic-infobox-header-color
+    title: Header background
+    type: variable-color
+    format: hex
+    default: '#070708'
+  -
+    id: relic-infobox-header-text
+    title: Header text
+    type: variable-color
+    format: hex
+    default: '#dfc27a'
+  -
+    id: relic-reference-images
+    title: Reference Images
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: reference-watercolour-gap
+    title: Text gap
+    type: variable-number
+    default: 24
+    format: px
+  -
+    id: reference-watercolour-max-width
+    title: Maximum floating width
+    type: variable-number-slider
+    default: 48
+    min: 25
+    max: 70
+    step: 1
+    format: '%'
+  -
+    id: reference-watercolour-shadow
+    title: Paint shadow strength
+    type: variable-number-slider
+    default: 0.16
+    min: 0
+    max: 0.4
+    step: 0.02
+*/
+
+body {
+  --relic-infobox-width: 300px;
+  --relic-infobox-font-size: 13px;
+  --relic-infobox-header-font-family: Georgia, "Times New Roman", serif;
+  --relic-infobox-title-size: 18px;
+  --relic-infobox-section-size: 14px;
+  --relic-infobox-row-padding: 5px;
+  --relic-infobox-radius: 14px;
+  --relic-infobox-text-color: #ddd4c2;
+  --relic-infobox-caption-color: #b9a982;
+  --relic-infobox-header-color: #070708;
+  --relic-infobox-header-text: #dfc27a;
+  --relic-infobox-border-color: #b79248;
+}
+
+/* Reading view and Live Preview. */
+.callout[data-callout="infobox"] {
+  --callout-color: 183, 146, 72;
+  --infobox-border: var(--relic-infobox-border-color);
+  --infobox-header: var(--relic-infobox-header-color);
+  --infobox-header-text: var(--relic-infobox-header-text);
+  --infobox-row-alt: rgba(183, 146, 72, 0.055);
+  /* Feed dark surfaces into themes that colour tables via variables. */
+  --background-primary: #030304;
+  --background-primary-alt: #050506;
+  --background-secondary: #030304;
+  --background-secondary-alt: #090806;
+  --table-background: #030304;
+  --table-background-hover: #0d0b08;
+  --table-row-background-hover: #0d0b08;
+  --table-header-background: #070708;
+  --table-header-background-hover: #0d0b08;
+
+  width: min(100%, var(--relic-infobox-width));
+  margin: 0 0 14px 18px;
+  padding: 0;
+  float: right;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--infobox-border) 72%, transparent);
+  border-radius: var(--relic-infobox-radius);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(183, 146, 72, 0.045), transparent 42%),
+    linear-gradient(155deg, #090909 0%, #050506 48%, #020203 100%);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.48),
+    inset 0 0 0 5px rgba(9, 8, 10, 0.72),
+    inset 0 0 0 6px color-mix(in srgb, var(--infobox-border) 24%, transparent),
+    inset 0 -32px 54px rgba(0, 0, 0, 0.58);
+  color: var(--relic-infobox-text-color);
+  font-size: var(--relic-infobox-font-size);
+  line-height: 1.35;
+}
+
+.callout[data-callout="infobox"] > .callout-title {
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 14px 9px;
+  border-bottom: 1px solid color-mix(in srgb, var(--infobox-border) 42%, transparent);
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, transparent, rgba(183, 146, 72, 0.08) 50%, transparent),
+    var(--infobox-header);
+  color: var(--infobox-header-text) !important;
+  font-family: var(--relic-infobox-header-font-family) !important;
+  font-size: var(--relic-infobox-title-size) !important;
+  font-variant: small-caps;
+  font-weight: 600 !important;
+  font-style: normal;
+  letter-spacing: 0.12em;
+  text-transform: none;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.callout[data-callout="infobox"] > .callout-title .callout-title-inner {
+  color: inherit !important;
+  font: inherit !important;
+  letter-spacing: inherit !important;
+  text-align: inherit !important;
+  text-transform: inherit !important;
+}
+
+.callout[data-callout="infobox"] > .callout-title .callout-icon,
+.callout[data-callout="infobox"] > .callout-title .callout-fold {
+  display: none;
+}
+
+.callout[data-callout="infobox"] > .callout-content {
+  padding: 0;
+  background: #030304 !important;
+  color: var(--relic-infobox-text-color);
+}
+
+/* Make the first image behave like the edge-to-edge portrait in a wiki card. */
+.callout[data-callout="infobox"] > .callout-content > p:first-child,
+.callout[data-callout="infobox"] > .callout-content > p:has(> img:only-child) {
+  margin: 0;
+}
+
+/* Only top-level Markdown images are feature images; leave link-plugin icons alone. */
+.callout[data-callout="infobox"] > .callout-content > p > img,
+.callout[data-callout="infobox"] > .callout-content > p > .internal-embed.image-embed > img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  object-fit: cover;
+}
+
+/* Image captions: place italic text directly beneath an image. */
+.callout[data-callout="infobox"] img + br + em,
+.callout[data-callout="infobox"] p:has(> em:only-child) {
+  color: var(--relic-infobox-caption-color);
+  text-align: center;
+}
+
+.callout[data-callout="infobox"] p:has(> em:only-child) {
+  margin: 0;
+  padding: 7px 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--infobox-border) 34%, transparent);
+  background: rgba(183, 146, 72, 0.035);
+}
+
+/* Every heading level becomes a compact, centred section bar. */
+.markdown-rendered .callout[data-callout="infobox"] > .callout-content :is(h1, h2, h3, h4, h5, h6) {
+  display: block !important;
+  margin: 0;
+  padding: 7px 9px 6px;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--infobox-border) 34%, transparent) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--infobox-border) 34%, transparent) !important;
+  background: linear-gradient(90deg, transparent, rgba(183, 146, 72, 0.11) 50%, transparent), var(--infobox-header) !important;
+  color: var(--infobox-header-text) !important;
+  font-family: var(--relic-infobox-header-font-family) !important;
+  font-size: var(--relic-infobox-section-size) !important;
+  font-variant: small-caps !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+  letter-spacing: 0.1em !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+}
+
+/* Remove divider bars and generated decorations supplied by other snippets. */
+body .markdown-rendered .callout[data-callout="infobox"] > .callout-content :is(h1, h2, h3, h4, h5, h6)::before,
+body .markdown-rendered .callout[data-callout="infobox"] > .callout-content :is(h1, h2, h3, h4, h5, h6)::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Markdown tables form the labelled information rows. */
+.callout[data-callout="infobox"] table {
+  display: table;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: #030304 !important;
+}
+
+/* Obsidian themes may paint each inner table layer separately. */
+body .markdown-rendered .callout[data-callout="infobox"] > .callout-content table,
+body .markdown-rendered .callout[data-callout="infobox"] > .callout-content tbody,
+body .markdown-rendered .callout[data-callout="infobox"] > .callout-content tr {
+  background-color: #030304 !important;
+}
+
+.callout[data-callout="infobox"] thead {
+  display: none;
+}
+
+.callout[data-callout="infobox"] tr {
+  border-bottom: 1px solid color-mix(in srgb, var(--infobox-border) 25%, transparent);
+}
+
+body .markdown-rendered .callout[data-callout="infobox"] > .callout-content tr:nth-child(odd) > th,
+body .markdown-rendered .callout[data-callout="infobox"] > .callout-content tr:nth-child(odd) > td {
+  background-color: #040405 !important;
+  background-image: none !important;
+}
+
+body .markdown-rendered .callout[data-callout="infobox"] > .callout-content tr:nth-child(even) > th,
+body .markdown-rendered .callout[data-callout="infobox"] > .callout-content tr:nth-child(even) > td {
+  background-color: #090806 !important;
+  background-image: none !important;
+}
+
+.callout[data-callout="infobox"] th,
+.callout[data-callout="infobox"] td {
+  padding: var(--relic-infobox-row-padding) 8px;
+  border: 0;
+  vertical-align: top;
+  font-size: var(--relic-infobox-font-size);
+  line-height: 1.35;
+}
+
+.callout[data-callout="infobox"] td:first-child {
+  width: 34%;
+  color: #d8bd78;
+  font-weight: var(--font-semibold);
+}
+
+.callout[data-callout="infobox"] td:last-child {
+  width: 66%;
+}
+
+.callout[data-callout="infobox"] td p,
+.callout[data-callout="infobox"] td ul {
+  margin-block: 0;
+}
+
+.callout[data-callout="infobox"] td ul {
+  padding-inline-start: 1.25rem;
+}
+
+.callout[data-callout="infobox"] a {
+  color: #c9a85c;
+  text-decoration-color: rgba(201, 168, 92, 0.5);
+}
+
+/* Reading View has its own table paint rules; keep this override late and specific. */
+body .markdown-reading-view .markdown-preview-view .callout[data-callout="infobox"],
+body .markdown-reading-view .markdown-rendered .callout[data-callout="infobox"] {
+  --background-primary: #030304 !important;
+  --background-primary-alt: #050506 !important;
+  --background-secondary: #030304 !important;
+  --background-secondary-alt: #090806 !important;
+  --table-background: #030304 !important;
+  --table-background-hover: #0d0b08 !important;
+  --table-row-background-hover: #0d0b08 !important;
+}
+
+body .markdown-reading-view .markdown-preview-view .callout[data-callout="infobox"] > .callout-content,
+body .markdown-reading-view .markdown-preview-view .callout[data-callout="infobox"] table,
+body .markdown-reading-view .markdown-preview-view .callout[data-callout="infobox"] tbody,
+body .markdown-reading-view .markdown-preview-view .callout[data-callout="infobox"] tr {
+  background: #030304 !important;
+  background-color: #030304 !important;
+}
+
+body .markdown-reading-view .markdown-preview-view .callout[data-callout="infobox"] tr:nth-child(odd) th,
+body .markdown-reading-view .markdown-preview-view .callout[data-callout="infobox"] tr:nth-child(odd) td {
+  background: #040405 !important;
+  background-color: #040405 !important;
+}
+
+body .markdown-reading-view .markdown-preview-view .callout[data-callout="infobox"] tr:nth-child(even) th,
+body .markdown-reading-view .markdown-preview-view .callout[data-callout="infobox"] tr:nth-child(even) td {
+  background: #090806 !important;
+  background-color: #090806 !important;
+}
+
+/* Guaranteed preview fill: works with nested or combined Reading View classes. */
+body .markdown-preview-view .callout[data-callout="infobox"] table tbody tr:nth-child(odd) > th,
+body .markdown-preview-view .callout[data-callout="infobox"] table tbody tr:nth-child(odd) > td,
+body .markdown-reading-view .callout[data-callout="infobox"] table tbody tr:nth-child(odd) > th,
+body .markdown-reading-view .callout[data-callout="infobox"] table tbody tr:nth-child(odd) > td {
+  background: #040405 !important;
+  box-shadow: inset 0 0 0 100vmax #040405 !important;
+}
+
+body .markdown-preview-view .callout[data-callout="infobox"] table tbody tr:nth-child(even) > th,
+body .markdown-preview-view .callout[data-callout="infobox"] table tbody tr:nth-child(even) > td,
+body .markdown-reading-view .callout[data-callout="infobox"] table tbody tr:nth-child(even) > th,
+body .markdown-reading-view .callout[data-callout="infobox"] table tbody tr:nth-child(even) > td {
+  background: #090806 !important;
+  box-shadow: inset 0 0 0 100vmax #090806 !important;
+}
+
+/* Dark preview surface; nested callouts retain ownership of their internals. */
+body :is(.markdown-preview-view, .markdown-reading-view) .callout[data-callout="infobox"] > .callout-content {
+  background: #030304 !important;
+  background-color: #030304 !important;
+}
+
+/* Prevent content after a floated card from wrapping when requested. */
+.markdown-rendered .callout[data-callout="infobox"] + hr {
+  clear: both;
+  visibility: hidden;
+}
+
+/* On narrow panes, use the full width and stop floating. */
+@media (max-width: 700px) {
+  .callout[data-callout="infobox"] {
+    width: 100%;
+    margin: 0 0 1rem;
+    float: none;
+  }
+}
+
+/* Print/export: retain structure without forcing shadow ink. */
+@media print {
+  .callout[data-callout="infobox"] {
+    box-shadow: none;
+  }
+}
+
+/* Final renderer guard: Metadata/VIEW spans and theme wrappers stay dark too. */
+html body .callout[data-callout="infobox"] table,
+html body .callout[data-callout="infobox"] table * {
+  background-color: #030304 !important;
+  background-image: none !important;
+}
+
+/* Painted cell surface for themes that visually suppress table backgrounds. */
+html body .callout[data-callout="infobox"] table tbody td {
+  position: relative;
+  isolation: isolate;
+}
+
+html body .callout[data-callout="infobox"] table tbody td::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: #030304;
+}
+
+html body .callout[data-callout="infobox"] table tbody tr:nth-child(even) td::before {
+  background: #080705;
+}
+
+/* Reading View compositing reset. */
+html body .markdown-reading-view .callout[data-callout="infobox"],
+html body .markdown-reading-view .callout[data-callout="infobox"] > .callout-content,
+html body .markdown-reading-view .callout[data-callout="infobox"] table,
+html body .markdown-reading-view .callout[data-callout="infobox"] tbody,
+html body .markdown-reading-view .callout[data-callout="infobox"] tr,
+html body .markdown-reading-view .callout[data-callout="infobox"] td {
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  background-blend-mode: normal !important;
+  filter: none !important;
+}
+
+/* Final Relic surface palette. */
+html body .callout[data-callout="infobox"] > .callout-content,
+html body .callout[data-callout="infobox"] table,
+html body .callout[data-callout="infobox"] table * {
+  background-color: #181716 !important;
+}
+
+html body .callout[data-callout="infobox"] table tbody td::before {
+  background: #181716;
+}
+
+html body .callout[data-callout="infobox"] table tbody tr:nth-child(even) > td,
+html body .callout[data-callout="infobox"] table tbody tr:nth-child(even) td::before {
+  background-color: #1e1b16 !important;
+  background: #1e1b16;
+}
+
+/* --------------------------------------------------------------------------
+ * Renderer parity: identical final surfaces in Live Preview and Reading View.
+ * Keep this section last.
+ * ----------------------------------------------------------------------- */
+
+html body .callout[data-callout="edict"],
+html body .callout[data-callout="infobox"],
+html body .callout[data-callout="infobox"] > .callout-content,
+html body .callout[data-callout="infobox"] table,
+html body .callout[data-callout="infobox"] tbody,
+html body .callout[data-callout="infobox"] tr,
+html body .callout[data-callout="infobox"] td {
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  background-blend-mode: normal !important;
+  filter: none !important;
+  box-sizing: border-box;
+}
+
+html body .callout[data-callout="edict"] {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(183, 146, 72, 0.09), transparent 58%),
+    linear-gradient(155deg, #191713 0%, #0d0c0c 68%, #09090a 100%) !important;
+}
+
+html body .callout[data-callout="infobox"] {
+  background: #181716 !important;
+}
+
+html body .callout[data-callout="infobox"] > .callout-title,
+html body .callout[data-callout="infobox"] > .callout-content :is(h1, h2, h3, h4, h5, h6) {
+  background:
+    linear-gradient(90deg, transparent, rgba(183, 146, 72, 0.07) 50%, transparent),
+    #11100f !important;
+}
+
+html body .callout[data-callout="infobox"] > .callout-content,
+html body .callout[data-callout="infobox"] p:has(> em:only-child) {
+  background: #181716 !important;
+  background-color: #181716 !important;
+}
+
+html body .callout[data-callout="infobox"] table,
+html body .callout[data-callout="infobox"] table *,
+html body .callout[data-callout="infobox"] table tbody td::before {
+  background-color: #181716 !important;
+  background-image: none !important;
+}
+
+html body .callout[data-callout="infobox"] table tbody tr:nth-child(even) > td,
+html body .callout[data-callout="infobox"] table tbody tr:nth-child(even) > td::before {
+  background: #1e1b16 !important;
+}
+
+/* Edict is an ornamental frame over the note, not a filled panel. */
+html body .callout[data-callout="edict"] {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body .callout[data-callout="edict"] .callout-fold {
+  background: var(--background-primary) !important;
+}
+
+/* Links inside Infobox section headers remain visible and clickable. */
+html body .callout[data-callout="infobox"] > .callout-content :is(h1, h2, h3, h4, h5, h6),
+html body .callout[data-callout="infobox"] > .callout-content :is(h1, h2, h3, h4, h5, h6) :is(a, .internal-link),
+html body .markdown-source-view.mod-cm6 .callout[data-callout="infobox"] :is(.cm-hmd-internal-link, .cm-link) {
+  pointer-events: auto !important;
+}
+
+html body .callout[data-callout="infobox"] > .callout-content :is(h1, h2, h3, h4, h5, h6) :is(a, .internal-link) {
+  position: relative;
+  z-index: 3;
+  color: inherit !important;
+  text-decoration-color: rgba(223, 194, 122, 0.5);
+  cursor: pointer;
+}
+
+html body .callout[data-callout="infobox"] > .callout-content :is(h1, h2, h3, h4, h5, h6) :is(a, .internal-link):hover {
+  color: #f0d58c !important;
+  text-decoration-line: underline;
+}
+
+/* Compact Infobox while editing in Live Preview; Reading View stays full-size. */
+html body .markdown-source-view.mod-cm6.is-live-preview .callout[data-callout="infobox"] {
+  --relic-infobox-font-size: 11px;
+  --relic-infobox-title-size: 14px;
+  --relic-infobox-section-size: 11px;
+  --relic-infobox-row-padding: 3px;
+  width: min(100%, 220px);
+  margin: 0 0 10px 12px;
+  border-radius: 10px;
+}
+
+html body .markdown-source-view.mod-cm6.is-live-preview .callout[data-callout="infobox"] > .callout-title {
+  min-height: 30px;
+  padding: 5px 9px;
+  letter-spacing: 0.1em;
+}
+
+html body .markdown-source-view.mod-cm6.is-live-preview .callout[data-callout="infobox"] > .callout-content {
+  max-height: 180px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+html body .markdown-source-view.mod-cm6.is-live-preview .callout[data-callout="infobox"] > .callout-content :is(h1, h2, h3, h4, h5, h6) {
+  padding: 4px 6px;
+  letter-spacing: 0.08em !important;
+}
+
+html body .markdown-source-view.mod-cm6.is-live-preview .callout[data-callout="infobox"] th,
+html body .markdown-source-view.mod-cm6.is-live-preview .callout[data-callout="infobox"] td {
+  padding-inline: 6px;
+}
+
+html body .markdown-source-view.mod-cm6.is-live-preview .callout[data-callout="infobox"] .callout[data-callout="gallery"] img {
+  max-height: 105px;
+  object-fit: cover;
+}
+
+/* Relic owns italic colours inside Infoboxes, not text-tweaks.css. */
+html body .callout[data-callout="infobox"] em,
+html body .callout[data-callout="infobox"] .cm-em {
+  color: inherit !important;
+}
+
+/* --------------------------------------------------------------------------
+ * Relic: Advice
+ * Use with: > [!advice] Explorer's Hint
+ * Foldable: > [!advice]- Explorer's Hint
+ * ----------------------------------------------------------------------- */
+
+.callout[data-callout="advice"] {
+  --callout-color: 196, 157, 78;
+  --callout-icon: lucide-lightbulb;
+  --rune-tip-gold: #c49d4e;
+  --rune-tip-bright: #ead18d;
+  --rune-tip-stone: #1b1a18;
+  --rune-tip-ink: #0d0d0e;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-block: 1em;
+  padding: 0;
+  color: #ddd6c6;
+  border: 1px solid rgba(196, 157, 78, 0.62);
+  border-left: 4px solid var(--rune-tip-gold);
+  border-radius: 5px 14px 14px 5px;
+  background:
+    linear-gradient(110deg, rgba(196, 157, 78, 0.09), transparent 28%),
+    linear-gradient(160deg, #211f1b, var(--rune-tip-stone) 48%, #121213) !important;
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.32),
+    inset 0 0 0 3px rgba(8, 8, 9, 0.5);
+}
+
+/* Faint carved runes along the lower edge. */
+.callout[data-callout="advice"]::after {
+  content: "ᚠ  ·  ᚢ  ·  ᚦ  ·  ᚱ  ·  ᚲ";
+  position: absolute;
+  right: 1.2em;
+  bottom: 0.25em;
+  z-index: -1;
+  color: rgba(234, 209, 141, 0.12);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.72em;
+  letter-spacing: 0.22em;
+  pointer-events: none;
+}
+
+.callout[data-callout="advice"] > .callout-title {
+  min-height: 2.55em;
+  gap: 0.7em;
+  padding: 0.68em 1em 0.62em;
+  color: var(--rune-tip-bright);
+  border-bottom: 1px solid rgba(196, 157, 78, 0.3);
+  background: linear-gradient(90deg, rgba(196, 157, 78, 0.1), transparent 72%);
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.85);
+}
+
+/* Replace the ordinary icon with a rune medallion. */
+.callout[data-callout="advice"] .callout-icon {
+  position: relative;
+  display: grid;
+  flex: 0 0 1.65em;
+  place-items: center;
+  width: 1.65em;
+  height: 1.65em;
+  color: var(--rune-tip-bright);
+  border: 1px solid rgba(234, 209, 141, 0.62);
+  border-radius: 3px 8px 3px 8px;
+  background: rgba(8, 8, 9, 0.72);
+  box-shadow: 0 0 10px rgba(196, 157, 78, 0.12);
+  transform: rotate(45deg);
+}
+
+.callout[data-callout="advice"] .callout-icon svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 1em;
+  height: 1em;
+  margin: 0;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  transform-origin: center;
+}
+
+.callout[data-callout="advice"] .callout-fold {
+  color: var(--rune-tip-gold);
+}
+
+.callout[data-callout="advice"] > .callout-content {
+  padding: 0.8em 1.1em 1em;
+  line-height: 1.55;
+}
+
+.callout[data-callout="advice"] > .callout-content p:first-child {
+  margin-top: 0;
+}
+
+.callout[data-callout="advice"] > .callout-content p:last-child {
+  margin-bottom: 0;
+}
+
+.callout[data-callout="advice"] strong {
+  color: var(--rune-tip-bright);
+}
+
+.callout[data-callout="advice"] a {
+  color: #d4ad5b;
+  text-decoration-color: rgba(212, 173, 91, 0.5);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .callout[data-callout="advice"] {
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .callout[data-callout="advice"]:hover {
+    border-color: rgba(234, 209, 141, 0.82);
+    box-shadow:
+      0 10px 26px rgba(0, 0, 0, 0.4),
+      0 0 16px rgba(196, 157, 78, 0.08),
+      inset 0 0 0 3px rgba(8, 8, 9, 0.5);
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * Relic: Reference Images
+ * Floating illustrated-reference artwork for rendered notes.
+ * ----------------------------------------------------------------------- */
+
+/* Reference Images
+ * ![[image.png|reference-right|380]]
+ * ![[image.png|reference-left|320]]
+ * Append -2 or -3 for alternate edges.
+ */
+
+body {
+  --reference-watercolour-gap: 24px;
+  --reference-watercolour-max-width: 48%;
+  --reference-watercolour-shadow: 0.16;
+  --reference-caption-color: color-mix(in srgb, var(--text-normal) 82%, transparent);
+  /* Natural feathering: mild paper-like distortion without a dark vignette. */
+  --reference-watercolour-mask-a: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cfilter id='f' x='-10%25' y='-10%25' width='120%25' height='120%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.018 .07' numOctaves='3' seed='8' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='6' result='d'/%3E%3CfeGaussianBlur in='d' stdDeviation='1.35'/%3E%3C/filter%3E%3Crect x='2.5' y='2.5' width='95' height='95' rx='2' fill='white' filter='url(%23f)'/%3E%3C/svg%3E");
+  --reference-watercolour-mask-b: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cfilter id='f' x='-10%25' y='-10%25' width='120%25' height='120%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.024 .055' numOctaves='3' seed='21' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='7' result='d'/%3E%3CfeGaussianBlur in='d' stdDeviation='1.5'/%3E%3C/filter%3E%3Crect x='2.5' y='2.5' width='95' height='95' rx='2' fill='white' filter='url(%23f)'/%3E%3C/svg%3E");
+  --reference-watercolour-mask-c: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cfilter id='f' x='-10%25' y='-10%25' width='120%25' height='120%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.015 .09' numOctaves='4' seed='34' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='7' result='d'/%3E%3CfeGaussianBlur in='d' stdDeviation='1.4'/%3E%3C/filter%3E%3Crect x='2.5' y='2.5' width='95' height='95' rx='2' fill='white' filter='url(%23f)'/%3E%3C/svg%3E");
+  --reference-watercolour-shape-a: polygon(2% 3%,24% 2%,50% 3%,76% 2%,98% 3%,97% 25%,98% 50%,97% 75%,98% 97%,75% 98%,50% 97%,25% 98%,2% 97%,3% 75%,2% 50%,3% 25%);
+  --reference-watercolour-shape-b: polygon(3% 2%,25% 3%,50% 2%,75% 3%,97% 2%,98% 25%,97% 50%,98% 75%,97% 98%,75% 97%,50% 98%,25% 97%,3% 98%,2% 75%,3% 50%,2% 25%);
+  --reference-watercolour-shape-c: polygon(2% 3%,25% 2%,50% 3%,75% 2%,98% 3%,97% 25%,98% 50%,97% 75%,98% 97%,75% 98%,50% 97%,25% 98%,2% 97%,3% 75%,2% 50%,3% 25%);
+}
+
+/* Float only the rendered image. Do not alter Obsidian's paragraph wrappers. */
+:is(.markdown-rendered, .markdown-source-view.mod-cm6) img[alt*="reference"] {
+  --reference-watercolour-mask: var(--reference-watercolour-mask-a);
+  --reference-watercolour-shape: var(--reference-watercolour-shape-a);
+  display: block;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 9px 24px rgb(30 24 18 / var(--reference-watercolour-shadow));
+  -webkit-mask: var(--reference-watercolour-mask) 0 0 / 100% 100% no-repeat;
+  mask: var(--reference-watercolour-mask) 0 0 / 100% 100% no-repeat;
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6) img[alt*="reference-left"] {
+  float: left;
+  clear: left;
+  max-width: var(--reference-watercolour-max-width);
+  margin: .35em var(--reference-watercolour-gap) .8em 0;
+  shape-outside: var(--reference-watercolour-shape);
+  shape-margin: 8px;
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6) img[alt*="reference-right"] {
+  --reference-watercolour-mask: var(--reference-watercolour-mask-b);
+  --reference-watercolour-shape: var(--reference-watercolour-shape-b);
+  float: right;
+  clear: right;
+  max-width: var(--reference-watercolour-max-width);
+  margin: .35em 0 .8em var(--reference-watercolour-gap);
+  shape-outside: var(--reference-watercolour-shape);
+  shape-margin: 8px;
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6) img:is([alt*="reference-left-2"],[alt*="reference-right-2"]) {
+  --reference-watercolour-mask: var(--reference-watercolour-mask-c);
+  --reference-watercolour-shape: var(--reference-watercolour-shape-c);
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6) img[alt*="reference-left-3"] {
+  --reference-watercolour-mask: var(--reference-watercolour-mask-b);
+  --reference-watercolour-shape: var(--reference-watercolour-shape-b);
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6) img[alt*="reference-right-3"] {
+  --reference-watercolour-mask: var(--reference-watercolour-mask-a);
+  --reference-watercolour-shape: var(--reference-watercolour-shape-a);
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6) img[alt*="reference-centre"] {
+  margin: 1em auto;
+  max-width: 100%;
+}
+
+/*
+ * Reading View caption syntax:
+ * ![[image.jpg|reference-right|280]] Caption text
+ *
+ * Obsidian renders the image and trailing text in one paragraph. Float its
+ * outer `.el-p` block so the caption sits beneath the image and travels with it.
+ */
+.markdown-rendered .el-p:has(img[alt*="reference-left"]),
+.markdown-rendered .el-p:has(img[alt*="reference-right"]) {
+  width: fit-content;
+  max-width: var(--reference-watercolour-max-width);
+  margin-block: .35em .8em;
+}
+
+.markdown-rendered .el-p:has(img[alt*="reference-left"]) {
+  float: left;
+  clear: left;
+  margin-right: var(--reference-watercolour-gap);
+}
+
+.markdown-rendered .el-p:has(img[alt*="reference-right"]) {
+  float: right;
+  clear: right;
+  margin-left: var(--reference-watercolour-gap);
+}
+
+.markdown-rendered .el-p:has(img[alt*="reference-left"]) > p,
+.markdown-rendered .el-p:has(img[alt*="reference-right"]) > p {
+  margin: 0;
+  padding-inline: .45em;
+  color: var(--reference-caption-color);
+  font-family: var(--font-text);
+  font-size: .9em;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.markdown-rendered .el-p:has(img[alt*="reference-left"]) img[alt*="reference-left"],
+.markdown-rendered .el-p:has(img[alt*="reference-right"]) img[alt*="reference-right"] {
+  float: none;
+  clear: none;
+  max-width: 100%;
+  margin: 0 auto .35em;
+}
+
+/*
+ * Preferred reference syntax:
+ * > ![[image.jpg|reference-right|280]] Caption text
+ *
+ * The blockquote becomes a transparent, self-contained floating figure.
+ */
+.markdown-rendered .el-blockquote:has(img[alt*="reference-left"]),
+.markdown-rendered .el-blockquote:has(img[alt*="reference-right"]) {
+  width: fit-content;
+  max-width: var(--reference-watercolour-max-width);
+  margin-block: .35em .8em;
+}
+
+.markdown-rendered .el-blockquote:has(img[alt*="reference-left"]) {
+  float: left;
+  clear: left;
+  margin-right: var(--reference-watercolour-gap);
+}
+
+.markdown-rendered .el-blockquote:has(img[alt*="reference-right"]) {
+  float: right;
+  clear: right;
+  margin-left: var(--reference-watercolour-gap);
+}
+
+.markdown-rendered .el-blockquote:has(img[alt*="reference-left"]) > blockquote,
+.markdown-rendered .el-blockquote:has(img[alt*="reference-right"]) > blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.markdown-rendered .el-blockquote:has(img[alt*="reference-left"]) > blockquote > p,
+.markdown-rendered .el-blockquote:has(img[alt*="reference-right"]) > blockquote > p {
+  margin: 0;
+  padding-inline: .45em;
+  color: var(--reference-caption-color);
+  font-family: var(--font-text);
+  font-size: .9em;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.markdown-rendered .el-blockquote:has(img[alt*="reference-left"]) img[alt*="reference-left"],
+.markdown-rendered .el-blockquote:has(img[alt*="reference-right"]) img[alt*="reference-right"] {
+  float: none;
+  clear: none;
+  max-width: 100%;
+  margin: 0 auto .35em;
+}
+
+/*
+ * Keep list markers, indentation guides, and list text in the same wrapping
+ * box. Without a formatting context, themes can leave the guide behind the
+ * image while shifting only the list text alongside it.
+ */
+.markdown-rendered:has(
+    img[alt*="reference-left"],
+    img[alt*="reference-right"]
+  ) :is(ul, ol) {
+  display: flow-root;
+}
+
+@media (max-width: 600px) {
+  :is(.markdown-rendered, .markdown-source-view.mod-cm6) img:is([alt*="reference-left"],[alt*="reference-right"]) {
+    float: none;
+    clear: none;
+    max-width: 100%;
+    margin: 1em auto;
+  }
+}

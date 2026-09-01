@@ -1,0 +1,120 @@
+/*
+ * Inline Title Tweaks
+ * Controls the note's inline title typography and optional Relic treatment.
+ * Works wherever Obsidian displays the `.inline-title` element.
+ */
+
+/* @settings
+
+name: Inline Title Tweaks
+id: inline-title-tweaks
+settings:
+  -
+    id: inline-title-style
+    title: Style
+    description: Choose the visual treatment for the inline title.
+    type: class-select
+    allowEmpty: false
+    default: inline-title-style-default
+    options:
+      - label: Default
+        value: inline-title-style-default
+      - label: Relic
+        value: inline-title-style-relic
+  -
+    id: inline-title-italic
+    title: Italic title
+    description: Display inline note titles in italics.
+    type: class-toggle
+    default: false
+  -
+    id: inline-title-shadow
+    title: Title shadow
+    description: Add a soft shadow to inline note titles.
+    type: class-toggle
+    default: true
+  -
+    id: inline-title-font
+    title: Font family
+    description: Enter a CSS font family, such as Georgia or var(--font-text).
+    type: variable-text
+    default: var(--font-text)
+  -
+    id: inline-title-color
+    title: Title colour
+    type: variable-color
+    format: hex
+    default: '#f4f4f4'
+  -
+    id: inline-title-size
+    title: Title size
+    type: variable-number-slider
+    default: 42
+    min: 20
+    max: 72
+    step: 1
+    format: px
+  -
+    id: inline-title-side-padding
+    title: Title side padding
+    type: variable-number-slider
+    default: 42
+    min: 12
+    max: 100
+    step: 2
+    format: px
+  -
+    id: inline-title-bottom-padding
+    title: Title bottom padding
+    type: variable-number-slider
+    default: 46
+    min: 12
+    max: 120
+    step: 2
+    format: px
+
+*/
+
+body {
+  --inline-title-font: var(--font-text);
+  --inline-title-color: #f4f4f4;
+  --inline-title-size: 42px;
+  --inline-title-side-padding: 42px;
+  --inline-title-bottom-padding: 46px;
+}
+
+.inline-title {
+  font-family: var(--inline-title-font);
+  font-style: normal;
+  text-shadow: none;
+}
+
+body.inline-title-italic .inline-title {
+  font-style: italic;
+}
+
+body.inline-title-shadow .inline-title {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.theme-dark.inline-title-shadow .inline-title {
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
+}
+
+/* Relic lettering treatment. */
+body.inline-title-style-relic .inline-title {
+  font-family: var(--relic-h1-font, Georgia, "Times New Roman", serif);
+  font-variant-caps: small-caps;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.3px color-mix(in srgb, currentColor 58%, black);
+}
+
+body.inline-title-style-relic.inline-title-shadow .inline-title {
+  text-shadow:
+    1px 1px 0 rgb(0 0 0 / 76%),
+    2px 2px 1px rgb(0 0 0 / 68%),
+    0 4px 6px rgb(0 0 0 / 58%),
+    0 7px 12px rgb(0 0 0 / 42%);
+}

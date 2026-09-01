@@ -1,0 +1,1387 @@
+/*
+ * Relic Style
+ * Combines the Relic interface theme and heading system.
+ * Theme rules come first; heading rules follow and retain final priority.
+ */
+
+/*
+ * Relic Theme: an Obsidian dark colour theme snippet
+ * ---------------------------------------------------
+ * Charcoal, soot and worked iron form a quiet setting for the warmer gold
+ * used by the Relic headers, callouts and Art Deco window frames.
+ *
+ * Enable in Settings > Appearance > CSS snippets.
+ */
+
+/* @settings
+
+name: Relic Style
+id: relic-style
+settings:
+  -
+    id: relic-style-theme
+    title: Theme
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: relic-stone-accent
+    title: Iron accent
+    description: Cool interface accent; relic gold remains reserved for ornamental snippets.
+    type: variable-color
+    format: hex
+    default: '#78958f'
+  -
+    id: relic-stone-text
+    title: Main text
+    type: variable-color
+    format: hex
+    default: '#d6d2c8'
+  -
+    id: relic-stone-muted
+    title: Muted text
+    type: variable-color
+    format: hex
+    default: '#918f89'
+  -
+    id: relic-stone-texture-opacity
+    title: Stone texture strength
+    type: variable-number-slider
+    default: 0.07
+    min: 0
+    max: 0.35
+    step: 0.01
+  -
+    id: relic-note-grain-strength
+    title: Note stone variation
+    description: Controls the quiet mineral variation behind note text.
+    type: variable-number-slider
+    default: 0.8
+    min: 0
+    max: 5
+    step: 0.1
+    format: '%'
+  -
+    id: relic-stone-high-contrast
+    title: Stronger pane contrast
+    type: class-toggle
+    default: false
+  -
+    id: relic-tables-compact
+    title: Compact relic tables
+    description: Reduces ordinary Markdown table spacing without changing Infobox tables.
+    type: class-toggle
+    default: false
+
+  -
+    id: relic-style-headers
+    title: Headers
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: relic-header-indent
+    title: Indent heading hierarchy
+    description: Move each left-aligned heading level slightly farther right than the previous level.
+    type: class-toggle
+    default: true
+  -
+    id: relic-header-1
+    title: Header 1
+    type: heading
+    level: 2
+    collapsed: true
+  -
+    id: relic-h1-color
+    title: Colour
+    type: variable-color
+    format: hex
+    default: '#dfc27a'
+  -
+    id: relic-h1-font
+    title: Font
+    description: Enter a font family name, such as Georgia or Inter.
+    type: variable-text
+    default: 'Georgia, "Times New Roman", serif'
+  -
+    id: relic-h1-size
+    title: Size
+    type: variable-number-slider
+    default: 1.5
+    min: 0.8
+    max: 3
+    step: 0.02
+    format: em
+  -
+    id: relic-h1-style
+    title: Style
+    type: class-select
+    allowEmpty: false
+    default: relic-h1-divider
+    options:
+      - label: Default
+        value: relic-h1-default
+      - label: Divider
+        value: relic-h1-divider
+      - label: Underline
+        value: relic-h1-underline
+      - label: Framed
+        value: relic-h1-framed
+      - label: Accent
+        value: relic-h1-accent
+      - label: Double Rule
+        value: relic-h1-double-rule
+      - label: Insignia
+        value: relic-h1-insignia
+      - label: Chevron
+        value: relic-h1-separator
+  -
+    id: relic-h1-alignment
+    title: Alignment
+    type: class-select
+    allowEmpty: false
+    default: relic-h1-left
+    options:
+      - label: Left
+        value: relic-h1-left
+      - label: Centre
+        value: relic-h1-center
+  -
+    id: relic-header-2
+    title: Header 2
+    type: heading
+    level: 2
+    collapsed: true
+  -
+    id: relic-h2-color
+    title: Colour
+    type: variable-color
+    format: hex
+    default: '#e8e6e3'
+  -
+    id: relic-h2-font
+    title: Font
+    description: Enter a font family name, such as Georgia or Inter.
+    type: variable-text
+    default: 'var(--font-text)'
+  -
+    id: relic-h2-size
+    title: Size
+    type: variable-number-slider
+    default: 1.4
+    min: 0.8
+    max: 3
+    step: 0.02
+    format: em
+  -
+    id: relic-h2-style
+    title: Style
+    type: class-select
+    allowEmpty: false
+    default: relic-h2-default
+    options:
+      - label: Default
+        value: relic-h2-default
+      - label: Divider
+        value: relic-h2-divider
+      - label: Underline
+        value: relic-h2-underline
+      - label: Framed
+        value: relic-h2-framed
+      - label: Accent
+        value: relic-h2-accent
+      - label: Double Rule
+        value: relic-h2-double-rule
+      - label: Insignia
+        value: relic-h2-insignia
+      - label: Chevron
+        value: relic-h2-separator
+  -
+    id: relic-h2-alignment
+    title: Alignment
+    type: class-select
+    allowEmpty: false
+    default: relic-h2-left
+    options:
+      - label: Left
+        value: relic-h2-left
+      - label: Centre
+        value: relic-h2-center
+  -
+    id: relic-header-3
+    title: Header 3
+    type: heading
+    level: 2
+    collapsed: true
+  -
+    id: relic-h3-color
+    title: Colour
+    type: variable-color
+    format: hex
+    default: '#e8e6e3'
+  -
+    id: relic-h3-font
+    title: Font
+    description: Enter a font family name, such as Georgia or Inter.
+    type: variable-text
+    default: 'var(--font-text)'
+  -
+    id: relic-h3-size
+    title: Size
+    type: variable-number-slider
+    default: 1.3
+    min: 0.8
+    max: 3
+    step: 0.02
+    format: em
+  -
+    id: relic-h3-style
+    title: Style
+    type: class-select
+    allowEmpty: false
+    default: relic-h3-default
+    options:
+      - label: Default
+        value: relic-h3-default
+      - label: Divider
+        value: relic-h3-divider
+      - label: Underline
+        value: relic-h3-underline
+      - label: Framed
+        value: relic-h3-framed
+      - label: Accent
+        value: relic-h3-accent
+      - label: Double Rule
+        value: relic-h3-double-rule
+      - label: Insignia
+        value: relic-h3-insignia
+      - label: Chevron
+        value: relic-h3-separator
+  -
+    id: relic-h3-alignment
+    title: Alignment
+    type: class-select
+    allowEmpty: false
+    default: relic-h3-left
+    options:
+      - label: Left
+        value: relic-h3-left
+      - label: Centre
+        value: relic-h3-center
+  -
+    id: relic-header-4
+    title: Header 4
+    type: heading
+    level: 2
+    collapsed: true
+  -
+    id: relic-h4-color
+    title: Colour
+    type: variable-color
+    format: hex
+    default: '#e8e6e3'
+  -
+    id: relic-h4-font
+    title: Font
+    description: Enter a font family name, such as Georgia or Inter.
+    type: variable-text
+    default: 'var(--font-text)'
+  -
+    id: relic-h4-size
+    title: Size
+    type: variable-number-slider
+    default: 1.2
+    min: 0.8
+    max: 3
+    step: 0.02
+    format: em
+  -
+    id: relic-h4-style
+    title: Style
+    type: class-select
+    allowEmpty: false
+    default: relic-h4-default
+    options:
+      - label: Default
+        value: relic-h4-default
+      - label: Divider
+        value: relic-h4-divider
+      - label: Underline
+        value: relic-h4-underline
+      - label: Framed
+        value: relic-h4-framed
+      - label: Accent
+        value: relic-h4-accent
+      - label: Double Rule
+        value: relic-h4-double-rule
+      - label: Insignia
+        value: relic-h4-insignia
+      - label: Chevron
+        value: relic-h4-separator
+  -
+    id: relic-h4-alignment
+    title: Alignment
+    type: class-select
+    allowEmpty: false
+    default: relic-h4-left
+    options:
+      - label: Left
+        value: relic-h4-left
+      - label: Centre
+        value: relic-h4-center
+  -
+    id: relic-header-5
+    title: Header 5
+    type: heading
+    level: 2
+    collapsed: true
+  -
+    id: relic-h5-color
+    title: Colour
+    type: variable-color
+    format: hex
+    default: '#e8e6e3'
+  -
+    id: relic-h5-font
+    title: Font
+    description: Enter a font family name, such as Georgia or Inter.
+    type: variable-text
+    default: 'var(--font-text)'
+  -
+    id: relic-h5-size
+    title: Size
+    type: variable-number-slider
+    default: 1.1
+    min: 0.8
+    max: 3
+    step: 0.02
+    format: em
+  -
+    id: relic-h5-style
+    title: Style
+    type: class-select
+    allowEmpty: false
+    default: relic-h5-default
+    options:
+      - label: Default
+        value: relic-h5-default
+      - label: Divider
+        value: relic-h5-divider
+      - label: Underline
+        value: relic-h5-underline
+      - label: Framed
+        value: relic-h5-framed
+      - label: Accent
+        value: relic-h5-accent
+      - label: Double Rule
+        value: relic-h5-double-rule
+      - label: Insignia
+        value: relic-h5-insignia
+      - label: Chevron
+        value: relic-h5-separator
+  -
+    id: relic-h5-alignment
+    title: Alignment
+    type: class-select
+    allowEmpty: false
+    default: relic-h5-left
+    options:
+      - label: Left
+        value: relic-h5-left
+      - label: Centre
+        value: relic-h5-center
+  -
+    id: relic-header-6
+    title: Header 6
+    type: heading
+    level: 2
+    collapsed: true
+  -
+    id: relic-h6-color
+    title: Colour
+    type: variable-color
+    format: hex
+    default: '#e8e6e3'
+  -
+    id: relic-h6-font
+    title: Font
+    description: Enter a font family name, such as Georgia or Inter.
+    type: variable-text
+    default: 'var(--font-text)'
+  -
+    id: relic-h6-size
+    title: Size
+    type: variable-number-slider
+    default: 1
+    min: 0.8
+    max: 3
+    step: 0.02
+    format: em
+  -
+    id: relic-h6-style
+    title: Style
+    type: class-select
+    allowEmpty: false
+    default: relic-h6-default
+    options:
+      - label: Default
+        value: relic-h6-default
+      - label: Divider
+        value: relic-h6-divider
+      - label: Underline
+        value: relic-h6-underline
+      - label: Framed
+        value: relic-h6-framed
+      - label: Accent
+        value: relic-h6-accent
+      - label: Double Rule
+        value: relic-h6-double-rule
+      - label: Insignia
+        value: relic-h6-insignia
+      - label: Chevron
+        value: relic-h6-separator
+  -
+    id: relic-h6-alignment
+    title: Alignment
+    type: class-select
+    allowEmpty: false
+    default: relic-h6-left
+    options:
+      - label: Left
+        value: relic-h6-left
+      - label: Centre
+        value: relic-h6-center
+
+*/
+
+body.theme-dark {
+  --relic-stone-accent: #78958f;
+  --relic-stone-text: #d6d2c8;
+  --relic-stone-muted: #918f89;
+  --relic-stone-texture-opacity: 0.07;
+  --relic-note-grain-strength: 0.8%;
+  --relic-gold: #b79248;
+  --relic-gold-bright: #dfc27a;
+  --relic-gold-deep: #705729;
+
+  /* Worked-stone hierarchy: close in hue, clearly stepped in value. */
+  --background-primary: #171819;
+  --background-primary-alt: #1c1d1e;
+  --background-secondary: #111213;
+  --background-secondary-alt: #0c0d0e;
+  --background-modifier-hover: rgb(120 149 143 / 10%);
+  --background-modifier-active-hover: rgb(120 149 143 / 16%);
+  --background-modifier-border: #303234;
+  --background-modifier-border-hover: #45494a;
+  --background-modifier-border-focus: color-mix(in srgb, var(--relic-stone-accent) 72%, #303234);
+  --background-modifier-form-field: #101112;
+  --background-modifier-form-field-highlighted: #191b1b;
+  --background-modifier-error: #673f3c;
+  --background-modifier-error-hover: #81504b;
+  --background-modifier-success: #536d61;
+  --background-modifier-message: #242627;
+
+  --text-normal: var(--relic-stone-text);
+  --text-muted: var(--relic-stone-muted);
+  --text-faint: #686a67;
+  --text-on-accent: #0d1211;
+  --text-accent: #91b4ad;
+  --text-accent-hover: #acd0c8;
+  --text-error: #d18f86;
+  --text-success: #9ab9a8;
+  --text-selection: rgb(120 149 143 / 27%);
+  --text-highlight-bg: rgb(170 139 75 / 24%);
+  --text-highlight-bg-active: rgb(170 139 75 / 34%);
+
+  --interactive-normal: #202223;
+  --interactive-hover: #292c2c;
+  --interactive-accent: var(--relic-stone-accent);
+  --interactive-accent-hover: #8eaaa4;
+  --interactive-success: #668477;
+
+  --icon-color: var(--relic-gold);
+  --icon-color-hover: var(--relic-gold-bright);
+  --icon-color-active: var(--relic-gold-bright);
+  --icon-color-focused: var(--relic-gold-bright);
+  --nav-item-color: #a5a49e;
+  --nav-item-color-hover: #dcdbd3;
+  --nav-item-color-active: #b8d0cb;
+  --nav-item-background-hover: rgb(255 255 255 / 4%);
+  --nav-item-background-active: rgb(120 149 143 / 13%);
+
+  --titlebar-background: #0b0c0d;
+  --titlebar-background-focused: #0e0f10;
+  --tab-container-background: #0e0f10;
+  --tab-text-color: #7f817e;
+  --tab-text-color-focused: #b8b8b2;
+  --tab-text-color-focused-active: #e0ddd4;
+  --divider-color: #292b2d;
+  --divider-color-hover: #667a76;
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: #393c3d;
+  --scrollbar-active-thumb-bg: #535858;
+
+  --code-background: #101112;
+  --code-normal: #c8c4ba;
+  --blockquote-border-color: #586b67;
+  --link-color: #8fb3ac;
+  --link-color-hover: #b0d0c9;
+  --link-unresolved-color: #9a8170;
+  --tag-color: #aac3be;
+  --tag-background: rgb(120 149 143 / 12%);
+  --tag-background-hover: rgb(120 149 143 / 21%);
+
+  color-scheme: dark;
+  accent-color: var(--relic-stone-accent);
+}
+
+/* Organic stone grain across the entire interface. */
+body.theme-dark .workspace {
+  isolation: isolate;
+}
+
+body.theme-dark .workspace::after {
+  content: "";
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--relic-stone-texture-opacity);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520' viewBox='0 0 520 520'%3E%3Cfilter id='stone'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.045' numOctaves='4' seed='73' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='.2' intercept='.4'/%3E%3CfeFuncG type='linear' slope='.22' intercept='.4'/%3E%3CfeFuncB type='linear' slope='.21' intercept='.41'/%3E%3CfeFuncA type='table' tableValues='.012 .045'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23stone)'/%3E%3C/svg%3E");
+  background-size: 520px 520px;
+  background-position: 0 0;
+  mix-blend-mode: soft-light;
+}
+
+/* The top and side chrome are darkest; notes sit one step forward. */
+body.theme-dark .titlebar,
+body.theme-dark .workspace-ribbon,
+body.theme-dark .workspace-tab-header-container {
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 1.8%), transparent 70%);
+}
+
+body.theme-dark .workspace-leaf-content,
+body.theme-dark .view-content {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 1.5%);
+}
+
+/*
+ * Utility panes use cool off-black leather instead of note stone. Compact,
+ * low-contrast pebbling gives the surface character without lines or patches.
+ */
+body.theme-dark .workspace-leaf-content:not([data-type="markdown"]):not([data-type="canvas"]):not([data-type="pdf"]):not([data-type="image"]) > .view-content,
+body.theme-dark .workspace-leaf-content[data-type="file-explorer"] .nav-files-container,
+body.theme-dark .workspace-leaf-content[data-type="properties"] .view-content,
+body.theme-dark .workspace-leaf-content[data-type="all-properties"] .view-content,
+body.theme-dark .workspace-leaf-content[data-type="bases"] .view-content,
+body.theme-dark .workspace-leaf-content[data-type="properties"] .metadata-container,
+body.theme-dark .workspace-leaf-content[data-type="all-properties"] .metadata-properties {
+  background-color: #101112;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cdefs%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.19' numOctaves='3' seed='67' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .018 0 0 0 0 .02 0 0 0 0 .02 .16 .16 .16 0 -.12'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='%23101112'/%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+  background-position: 0 0;
+  background-blend-mode: normal;
+}
+
+/* Recessed rows and cards feel pressed into the leather rather than pasted on. */
+body.theme-dark .workspace-leaf-content:not([data-type="markdown"]) .tree-item-self,
+body.theme-dark .workspace-leaf-content:not([data-type="markdown"]) .metadata-property,
+body.theme-dark .bases-view .bases-thead,
+body.theme-dark .bases-view .bases-tr,
+body.theme-dark .bases-view .bases-card {
+  border-color: rgb(103 109 107 / 18%);
+}
+
+body.theme-dark .workspace-leaf-content:not([data-type="markdown"]) .tree-item-self:hover,
+body.theme-dark .workspace-leaf-content:not([data-type="markdown"]) .metadata-property:hover,
+body.theme-dark .bases-view .bases-tr:hover,
+body.theme-dark .bases-view .bases-card:hover {
+  background-color: rgb(132 142 139 / 6%);
+  box-shadow: inset 0 1px 0 rgb(220 226 223 / 2%);
+}
+
+body.theme-dark .workspace-leaf-content:not([data-type="markdown"]) .tree-item-self.is-active,
+body.theme-dark .workspace-leaf-content[data-type="file-explorer"] .nav-file-title.is-active {
+  background-color: rgb(120 149 143 / 11%);
+  box-shadow:
+    inset 2px 0 0 var(--relic-stone-accent),
+    inset 0 1px 0 rgb(211 185 135 / 3%);
+}
+
+/* Pressed folio edges finish the leather without decorative stitching. */
+body.theme-dark .workspace-leaf-content:not([data-type="markdown"]):not([data-type="canvas"]):not([data-type="pdf"]):not([data-type="image"]) > .view-content {
+  border: 1px solid rgb(83 89 87 / 18%);
+  box-shadow:
+    inset 0 0 0 3px rgb(0 0 0 / 12%),
+    inset 0 1px 0 rgb(226 232 229 / 2.5%),
+    inset 0 14px 28px rgb(0 0 0 / 8%);
+}
+
+/* Small, independent edge fractures over an even, fine-grained rock surface. */
+body.theme-dark .markdown-source-view.mod-cm6 .cm-scroller,
+body.theme-dark .markdown-preview-view {
+  background-color: var(--background-primary);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='310' height='210' viewBox='0 0 310 210'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M-8 42 34 48 63 39 92 55 121 51 143 70 171 75 194 94 223 98' stroke='%23070808' stroke-width='1.15' opacity='.58'/%3E%3Cpath d='M92 55 98 83 87 104 94 127M143 70 154 47 150 25M194 94 211 82 230 91' stroke='%23070808' stroke-width='.8' opacity='.48'/%3E%3Cpath d='M-8 41 34 47 63 38 92 54 121 50 143 69 171 74 194 93 223 97' stroke='%23535d5a' stroke-width='.45' opacity='.28'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='250' viewBox='0 0 260 250'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round' transform='rotate(-8 130 125)'%3E%3Cpath d='M270 66 229 72 202 64 177 82 149 79 128 101 99 105 75 128 42 132 -9 153' stroke='%23070808' stroke-width='1.1' opacity='.55'/%3E%3Cpath d='M177 82 169 112 179 139 164 161M99 105 92 79 101 55M42 132 51 160 43 184' stroke='%23070808' stroke-width='.75' opacity='.45'/%3E%3Cpath d='M270 65 229 71 202 63 177 81 149 78 128 100 99 104 75 127 42 131 -9 152' stroke='%23535d5a' stroke-width='.4' opacity='.26'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='460' height='460' viewBox='0 0 460 460'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.055' numOctaves='4' seed='19' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='.13' intercept='.44'/%3E%3CfeFuncG type='linear' slope='.14' intercept='.44'/%3E%3CfeFuncB type='linear' slope='.14' intercept='.45'/%3E%3CfeFuncA type='table' tableValues='.004 .015'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(135deg, color-mix(in srgb, #6f7875 var(--relic-note-grain-strength), transparent), transparent 34%, rgb(0 0 0 / 0.6%));
+  background-size: 310px 210px, 260px 250px, 460px 460px, 100% 100%;
+  background-position: left 24px top 54px, right 18px bottom 72px, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-attachment: local;
+  background-blend-mode: normal, normal, normal, normal;
+}
+
+body.theme-dark.relic-stone-high-contrast {
+  --background-primary: #191b1c;
+  --background-secondary: #0d0e0f;
+  --background-secondary-alt: #08090a;
+  --background-modifier-border: #383b3d;
+}
+
+/* Quietly carved controls: squared enough to feel hewn, not futuristic. */
+body.theme-dark button,
+body.theme-dark input,
+body.theme-dark textarea,
+body.theme-dark select,
+body.theme-dark .dropdown {
+  border-color: #353839;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 2.5%), 0 1px 2px rgb(0 0 0 / 28%);
+}
+
+/* Relic-gold iconography throughout the workspace chrome and utility views. */
+body.theme-dark .clickable-icon,
+body.theme-dark .workspace-ribbon .clickable-icon,
+body.theme-dark .workspace-tab-header .workspace-tab-header-inner-icon,
+body.theme-dark .nav-buttons-container .clickable-icon,
+body.theme-dark .view-actions .clickable-icon,
+body.theme-dark .modal-close-button,
+body.theme-dark .suggestion-flair,
+body.theme-dark .tree-item-icon,
+body.theme-dark .collapse-icon,
+body.theme-dark .menu-item-icon,
+body.theme-dark .setting-item-control .clickable-icon,
+body.theme-dark .metadata-property-icon,
+body.theme-dark .metadata-property-key .clickable-icon,
+body.theme-dark .bases-toolbar .clickable-icon,
+body.theme-dark .bases-view .clickable-icon,
+body.theme-dark .search-input-clear-button,
+body.theme-dark .status-bar-item-icon {
+  color: var(--relic-gold);
+}
+
+/* Some Obsidian and plugin controls set SVG strokes locally; normalise them. */
+body.theme-dark .clickable-icon svg.svg-icon,
+body.theme-dark button svg.svg-icon,
+body.theme-dark .workspace-ribbon svg.svg-icon,
+body.theme-dark .workspace-tab-header svg.svg-icon,
+body.theme-dark .menu-item-icon svg.svg-icon,
+body.theme-dark .tree-item-icon svg.svg-icon,
+body.theme-dark .collapse-icon svg.svg-icon,
+body.theme-dark .metadata-property-icon svg.svg-icon,
+body.theme-dark .bases-view svg.svg-icon,
+body.theme-dark .setting-item-control svg.svg-icon,
+body.theme-dark .status-bar svg.svg-icon {
+  color: inherit !important;
+  stroke: currentColor !important;
+}
+
+body.theme-dark .clickable-icon svg.svg-icon *,
+body.theme-dark button svg.svg-icon *,
+body.theme-dark .menu-item-icon svg.svg-icon *,
+body.theme-dark .metadata-property-icon svg.svg-icon *,
+body.theme-dark .bases-view svg.svg-icon * {
+  stroke: currentColor !important;
+}
+
+body.theme-dark .clickable-icon:hover,
+body.theme-dark .clickable-icon.is-active,
+body.theme-dark .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
+body.theme-dark .menu-item:hover .menu-item-icon,
+body.theme-dark .tree-item-self:hover .tree-item-icon,
+body.theme-dark .metadata-property:hover .metadata-property-icon,
+body.theme-dark .bases-view .clickable-icon:hover {
+  color: var(--relic-gold-bright);
+  background-color: rgb(183 146 72 / 10%);
+  text-shadow: 0 0 9px rgb(223 194 122 / 18%);
+}
+
+/* Standard buttons resemble small dark metal plaques edged in antique gold. */
+body.theme-dark button:not(.clickable-icon) {
+  color: var(--relic-gold-bright);
+  background: #161512;
+  border: 1px solid rgb(183 146 72 / 55%);
+  box-shadow:
+    inset 0 1px 0 rgb(239 213 151 / 6%),
+    0 2px 5px rgb(0 0 0 / 28%);
+}
+
+body.theme-dark button:not(.clickable-icon):hover {
+  color: #f0d99e;
+  background: #201d17;
+  border-color: var(--relic-gold-bright);
+  box-shadow:
+    inset 0 1px 0 rgb(248 222 160 / 10%),
+    0 0 10px rgb(183 146 72 / 10%);
+}
+
+body.theme-dark button.mod-cta:not(.clickable-icon) {
+  color: #15120b;
+  background: linear-gradient(180deg, var(--relic-gold-bright), #b48c40);
+  border-color: #e9ce8c;
+  font-weight: 650;
+  text-shadow: 0 1px 0 rgb(255 244 209 / 24%);
+}
+
+body.theme-dark button.mod-cta:not(.clickable-icon):hover {
+  color: #0e0c08;
+  background: linear-gradient(180deg, #ecd493, #c39a4c);
+}
+
+body.theme-dark .modal,
+body.theme-dark .menu,
+body.theme-dark .prompt,
+body.theme-dark .popover {
+  border: 1px solid #3a3d3e;
+  background-color: #151718;
+  box-shadow: 0 18px 50px rgb(0 0 0 / 55%), inset 0 1px 0 rgb(255 255 255 / 3%);
+}
+
+body.theme-dark .workspace-tab-header.is-active {
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--relic-stone-accent) 64%, transparent);
+}
+
+body.theme-dark .nav-file-title.is-active,
+body.theme-dark .nav-folder-title.is-active {
+  box-shadow: inset 2px 0 0 var(--relic-stone-accent);
+}
+
+body.theme-dark hr {
+  border-color: transparent;
+  background: linear-gradient(90deg, transparent, #4a4d4c 18%, #5d6865 50%, #4a4d4c 82%, transparent);
+  height: 1px;
+}
+
+/* -------------------------------------------------------------------------
+ * Relic tables: engraved dark panels with restrained antique-gold framing.
+ * ---------------------------------------------------------------------- */
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)),
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) {
+  width: 100%;
+  margin-block: 1.25em;
+  overflow: hidden;
+  color: var(--text-normal);
+  background: #111211;
+  border: 1px solid rgb(183 146 72 / 58%);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 6px;
+  box-shadow:
+    0 8px 20px rgb(0 0 0 / 24%),
+    inset 0 0 0 1px rgb(223 194 122 / 4%);
+}
+
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) thead,
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) thead {
+  color: var(--relic-gold-bright);
+  background:
+    linear-gradient(180deg, rgb(183 146 72 / 12%), rgb(183 146 72 / 4%)),
+    #171612;
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant-caps: small-caps;
+  font-weight: 650;
+  letter-spacing: 0.075em;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 72%);
+}
+
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) th,
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) td,
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) th,
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) td {
+  padding: 0.62em 0.82em;
+  border: 0;
+  border-right: 1px solid rgb(183 146 72 / 18%);
+  border-bottom: 1px solid rgb(183 146 72 / 16%);
+  vertical-align: top;
+}
+
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) th:last-child,
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) td:last-child,
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) th:last-child,
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) td:last-child {
+  border-right: 0;
+}
+
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) tbody tr:last-child td,
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) tbody tr:nth-child(even),
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) tbody tr:nth-child(even) {
+  background-color: rgb(255 255 255 / 1.8%);
+}
+
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) tbody tr {
+  transition: background-color 140ms ease, box-shadow 140ms ease;
+}
+
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) tbody tr:hover,
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) tbody tr:hover {
+  background-color: rgb(120 149 143 / 9%);
+  box-shadow: inset 2px 0 0 var(--relic-stone-accent);
+}
+
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) strong,
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) strong {
+  color: #e3ca8b;
+}
+
+body.theme-dark .markdown-rendered table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) a,
+body.theme-dark .markdown-source-view.mod-cm6 .cm-table-widget table:not(:is(.bases-view table, .bases-embed table, .bases-table-container table, .internal-embed[data-type="bases"] table, .bases-table)) a {
+  color: #c9aa63;
+  text-decoration-color: rgb(201 170 99 / 42%);
+}
+
+/* Markdown table source remains recognisably part of the same framed system. */
+body.theme-dark .markdown-source-view.mod-cm6 .HyperMD-table-row {
+  background-color: rgb(17 18 17 / 72%);
+}
+
+body.theme-dark .markdown-source-view.mod-cm6 .cm-hmd-table-sep,
+body.theme-dark .markdown-source-view.mod-cm6 .cm-hmd-table-delimiter {
+  color: var(--relic-gold);
+}
+
+/* Optional compact density. Complex :not() keeps Infobox descendants out. */
+body.theme-dark.relic-tables-compact .markdown-rendered table:not(.callout[data-callout="infobox"] table):not(.bases-view table):not(.bases-embed table):not(.internal-embed[data-type="bases"] table):not(.bases-table),
+body.theme-dark.relic-tables-compact .markdown-source-view.mod-cm6 .cm-table-widget table:not(.callout[data-callout="infobox"] table):not(.bases-view table):not(.bases-embed table):not(.internal-embed[data-type="bases"] table):not(.bases-table) {
+  width: max-content;
+  max-width: 100%;
+  margin-block: 0.72em;
+  font-size: 0.9em;
+  line-height: 1.35;
+}
+
+body.theme-dark.relic-tables-compact .markdown-rendered table:not(.callout[data-callout="infobox"] table):not(.bases-view table):not(.bases-embed table):not(.internal-embed[data-type="bases"] table):not(.bases-table) th,
+body.theme-dark.relic-tables-compact .markdown-rendered table:not(.callout[data-callout="infobox"] table):not(.bases-view table):not(.bases-embed table):not(.internal-embed[data-type="bases"] table):not(.bases-table) td,
+body.theme-dark.relic-tables-compact .markdown-source-view.mod-cm6 .cm-table-widget table:not(.callout[data-callout="infobox"] table):not(.bases-view table):not(.bases-embed table):not(.internal-embed[data-type="bases"] table):not(.bases-table) th,
+body.theme-dark.relic-tables-compact .markdown-source-view.mod-cm6 .cm-table-widget table:not(.callout[data-callout="infobox"] table):not(.bases-view table):not(.bases-embed table):not(.internal-embed[data-type="bases"] table):not(.bases-table) td {
+  padding: 0.34em 0.56em;
+}
+
+body.theme-dark.relic-tables-compact .markdown-rendered table:not(.callout[data-callout="infobox"] table):not(.bases-view table):not(.bases-embed table):not(.internal-embed[data-type="bases"] table):not(.bases-table) thead,
+body.theme-dark.relic-tables-compact .markdown-source-view.mod-cm6 .cm-table-widget table:not(.callout[data-callout="infobox"] table):not(.bases-view table):not(.bases-embed table):not(.internal-embed[data-type="bases"] table):not(.bases-table) thead {
+  letter-spacing: 0.055em;
+}
+
+body.theme-dark ::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+/* Keep texture almost imperceptible on small, high-density screens. */
+@media (max-width: 700px) {
+  body.theme-dark .workspace::after {
+    opacity: calc(var(--relic-stone-texture-opacity) * 0.7);
+  }
+}
+
+/* -------------------------------------------------------------------------
+ * Infobox table exemption
+ * relic-callouts.css owns these compact information rows completely.
+ * Keep this after the ordinary Relic table system.
+ * ---------------------------------------------------------------------- */
+body.theme-dark .callout[data-callout="infobox"] table {
+  display: table;
+  width: 100%;
+  max-width: none;
+  margin: 0 !important;
+  overflow: visible;
+  border: 0 !important;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  table-layout: fixed;
+  font-size: var(--relic-infobox-font-size);
+  line-height: 1.35;
+}
+
+body.theme-dark .callout[data-callout="infobox"] table thead {
+  display: none;
+}
+
+body.theme-dark .callout[data-callout="infobox"] table :is(th, td) {
+  padding: var(--relic-infobox-row-padding) 8px !important;
+  border: 0 !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--relic-infobox-border-color) 25%, transparent) !important;
+  border-radius: 0 !important;
+  vertical-align: top;
+}
+
+body.theme-dark .callout[data-callout="infobox"] table tbody tr:last-child > :is(th, td) {
+  border-bottom: 0 !important;
+}
+
+body.theme-dark .callout[data-callout="infobox"] table tbody tr,
+body.theme-dark .callout[data-callout="infobox"] table tbody tr:hover {
+  box-shadow: none !important;
+  transition: none;
+}
+
+body.theme-dark .callout[data-callout="infobox"] table tbody tr:nth-child(odd),
+body.theme-dark .callout[data-callout="infobox"] table tbody tr:nth-child(odd):hover {
+  background-color: #181716 !important;
+}
+
+body.theme-dark .callout[data-callout="infobox"] table tbody tr:nth-child(even),
+body.theme-dark .callout[data-callout="infobox"] table tbody tr:nth-child(even):hover {
+  background-color: #1e1b16 !important;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  body.theme-dark .workspace::after {
+    display: none;
+  }
+
+  body.theme-dark .markdown-source-view.mod-cm6 .cm-scroller,
+  body.theme-dark .markdown-preview-view {
+    background-image: none;
+  }
+}
+
+/* ==========================================================================
+ * Relic Headers
+ * ======================================================================= */
+
+/*
+ * relic-headers
+ * Configurable Obsidian heading styles.
+ */
+
+
+
+body {
+  --relic-h1-color: #dfc27a;
+  --relic-h2-color: #e8e6e3;
+  --relic-h3-color: #e8e6e3;
+  --relic-h4-color: #e8e6e3;
+  --relic-h5-color: #e8e6e3;
+  --relic-h6-color: #e8e6e3;
+  --relic-h1-font: Georgia, "Times New Roman", serif;
+  --relic-h2-font: var(--font-text);
+  --relic-h3-font: var(--font-text);
+  --relic-h4-font: var(--font-text);
+  --relic-h5-font: var(--font-text);
+  --relic-h6-font: var(--font-text);
+  --relic-h1-size: 1.5em;
+  --relic-h2-size: 1.4em;
+  --relic-h3-size: 1.3em;
+  --relic-h4-size: 1.2em;
+  --relic-h5-size: 1.1em;
+  --relic-h6-size: 1em;
+  --relic-header-divider-thickness: 1px;
+  --relic-header-divider-short-width: 7px;
+  --relic-header-divider-gap: 0.72em;
+  --relic-header-indent-step: 0.75rem;
+}
+
+/* Colour every heading in both Default and Divider styles. */
+:is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1) { color: var(--relic-h1-color); }
+:is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2) { color: var(--relic-h2-color); }
+:is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3) { color: var(--relic-h3-color); }
+:is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4) { color: var(--relic-h4-color); }
+:is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5) { color: var(--relic-h5-color); }
+:is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) { color: var(--relic-h6-color); }
+
+/* Apply the selected font to every heading style. */
+:is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1) { font-family: var(--relic-h1-font); }
+:is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2) { font-family: var(--relic-h2-font); }
+:is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3) { font-family: var(--relic-h3-font); }
+:is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4) { font-family: var(--relic-h4-font); }
+:is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5) { font-family: var(--relic-h5-font); }
+:is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) { font-family: var(--relic-h6-font); }
+
+/* Apply the adjustable heading scale in Reading View and Live Preview. */
+:is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1) { font-size: var(--relic-h1-size); }
+:is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2) { font-size: var(--relic-h2-size); }
+:is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3) { font-size: var(--relic-h3-size); }
+:is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4) { font-size: var(--relic-h4-size); }
+:is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5) { font-size: var(--relic-h5-size); }
+:is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) { font-size: var(--relic-h6-size); }
+
+/* Underline: a quiet engraved rule that fades into the page. */
+body.relic-h1-underline :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-underline :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-underline :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-underline :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-underline :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-underline :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  display: flow-root;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: 0 auto;
+  padding: 0 10em 0.22em 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, currentColor 0%, color-mix(in srgb, currentColor 48%, transparent) 58%, transparent 100%) 1;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.66);
+}
+
+/* Framed: a dark ceremonial plaque with a fine inset glint. */
+body.relic-h1-framed :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-framed :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-framed :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-framed :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-framed :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-framed :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  display: flow-root;
+  padding: 0.3em 0.72em 0.34em;
+  border: 1px solid color-mix(in srgb, currentColor 48%, transparent);
+  border-radius: 3px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, currentColor 8%, transparent), transparent 42%),
+    linear-gradient(155deg, rgba(25, 23, 19, 0.92), rgba(9, 8, 10, 0.96));
+  box-shadow:
+    inset 0 0 0 3px rgba(9, 8, 10, 0.7),
+    inset 0 0 0 4px color-mix(in srgb, currentColor 16%, transparent),
+    0 5px 14px rgba(0, 0, 0, 0.24);
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.78);
+}
+
+/* Accent: a compact vertical relic mark and a faint wash behind the title. */
+body.relic-h1-accent :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-accent :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-accent :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-accent :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-accent :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-accent :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  padding: 0.12em 0.55em 0.16em 0.7em;
+  border-left: 3px double currentColor;
+  background: linear-gradient(90deg, color-mix(in srgb, currentColor 10%, transparent), transparent 52%);
+  font-variant: small-caps;
+  letter-spacing: 0.065em;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.66);
+}
+
+/* Double Rule: slim engraved rails above and below the heading. */
+body.relic-h1-double-rule :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-double-rule :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-double-rule :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-double-rule :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-double-rule :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-double-rule :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  display: flow-root;
+  padding: 0.3em 0.5em 0.34em;
+  background:
+    linear-gradient(90deg, transparent, currentColor 16%, currentColor 84%, transparent) top / 100% 1px no-repeat,
+    linear-gradient(90deg, transparent, currentColor 16%, currentColor 84%, transparent) bottom / 100% 1px no-repeat;
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-align: left;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.7);
+}
+
+/* Insignia: a normal block heading with independent edge ornaments. */
+body.relic-h1-insignia :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-insignia :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-insignia :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-insignia :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-insignia :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-insignia :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  position: relative;
+  /* A flow root keeps the ornament beside floated callouts instead of under them. */
+  display: flow-root;
+  width: auto;
+  max-width: none;
+  margin-inline: 0;
+  padding: 0.18em 1.35em 0.22em;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, currentColor 9%, rgba(255, 255, 255, 0.025)) 0%,
+    rgba(255, 255, 255, 0.035) 24%,
+    rgba(255, 255, 255, 0.035) 76%,
+    color-mix(in srgb, currentColor 9%, rgba(255, 255, 255, 0.025)) 100%
+  );
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.72);
+}
+
+/* The ornaments are absolutely positioned, so they never enter the text flow
+   or interfere with Obsidian's native heading collapse control. */
+body.relic-h1-insignia :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::before,
+body.relic-h1-insignia :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::after,
+body.relic-h2-insignia :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::before,
+body.relic-h2-insignia :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::after,
+body.relic-h3-insignia :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::before,
+body.relic-h3-insignia :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::after,
+body.relic-h4-insignia :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::before,
+body.relic-h4-insignia :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::after,
+body.relic-h5-insignia :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::before,
+body.relic-h5-insignia :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::after,
+body.relic-h6-insignia :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::before,
+body.relic-h6-insignia :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  background: currentColor;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  opacity: 0.72;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+body.relic-h1-insignia :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::before,
+body.relic-h2-insignia :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::before,
+body.relic-h3-insignia :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::before,
+body.relic-h4-insignia :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::before,
+body.relic-h5-insignia :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::before,
+body.relic-h6-insignia :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::before {
+  inset-inline-start: 0.32em;
+}
+
+body.relic-h1-insignia :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::after,
+body.relic-h2-insignia :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::after,
+body.relic-h3-insignia :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::after,
+body.relic-h4-insignia :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::after,
+body.relic-h5-insignia :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::after,
+body.relic-h6-insignia :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::after {
+  inset-inline-end: 0.32em;
+}
+
+/* Separator: a compact Relic title with restrained winged chevrons. */
+body.relic-h1-separator :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-separator :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-separator :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-separator :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-separator :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-separator :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  display: flow-root;
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: 0 auto;
+  padding: 0.2em 1.3em 0.24em;
+  background: none;
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 0.085em;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.7);
+}
+
+body.relic-h1-separator :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::before,
+body.relic-h2-separator :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::before,
+body.relic-h3-separator :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::before,
+body.relic-h4-separator :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::before,
+body.relic-h5-separator :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::before,
+body.relic-h6-separator :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 0.28em;
+  width: 0.46em;
+  height: 0.46em;
+  border-inline-start: 1px solid currentColor;
+  border-block-end: 1px solid currentColor;
+  filter: drop-shadow(3px -3px 0 color-mix(in srgb, currentColor 38%, transparent));
+  opacity: 0.68;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+body.relic-h1-separator :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::after,
+body.relic-h2-separator :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::after,
+body.relic-h3-separator :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::after,
+body.relic-h4-separator :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::after,
+body.relic-h5-separator :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::after,
+body.relic-h6-separator :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 0.28em;
+  width: 0.46em;
+  height: 0.46em;
+  border-block-start: 1px solid currentColor;
+  border-inline-end: 1px solid currentColor;
+  filter: drop-shadow(-3px 3px 0 color-mix(in srgb, currentColor 38%, transparent));
+  opacity: 0.68;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* Divider headings in Reading View and Live Preview. */
+body.relic-h1-divider :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-divider :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-divider :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-divider :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-divider :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-divider :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  display: flex;
+  align-items: center;
+  gap: var(--relic-header-divider-gap);
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.72);
+}
+
+body.relic-h1-divider :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::before,
+body.relic-h1-divider :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::after,
+body.relic-h2-divider :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::before,
+body.relic-h2-divider :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::after,
+body.relic-h3-divider :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::before,
+body.relic-h3-divider :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::after,
+body.relic-h4-divider :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::before,
+body.relic-h4-divider :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::after,
+body.relic-h5-divider :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::before,
+body.relic-h5-divider :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::after,
+body.relic-h6-divider :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::before,
+body.relic-h6-divider :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::after {
+  content: "";
+  display: block;
+  height: var(--relic-header-divider-thickness);
+  background: currentColor;
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+body.relic-h1-divider :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::before,
+body.relic-h2-divider :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::before,
+body.relic-h3-divider :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::before,
+body.relic-h4-divider :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::before,
+body.relic-h5-divider :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::before,
+body.relic-h6-divider :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::before {
+  flex: 0 0 var(--relic-header-divider-short-width);
+  height: 7px;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  opacity: 0.76;
+}
+
+body.relic-h1-divider :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::after,
+body.relic-h2-divider :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::after,
+body.relic-h3-divider :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::after,
+body.relic-h4-divider :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::after,
+body.relic-h5-divider :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::after,
+body.relic-h6-divider :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::after {
+  flex: 1 1 auto;
+  min-width: 1.5em;
+}
+
+/* A fine fading rule echoes the engraved lines used by Relic panels. */
+body.relic-h1-divider :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::after,
+body.relic-h2-divider :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::after,
+body.relic-h3-divider :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::after,
+body.relic-h4-divider :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::after,
+body.relic-h5-divider :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::after,
+body.relic-h6-divider :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::after {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    currentColor 0%,
+    color-mix(in srgb, currentColor 68%, #6e5226) 78%,
+    transparent 100%
+  );
+  clip-path: none;
+  opacity: 0.62;
+}
+
+/* Keep formatted text and editor tokens from stretching. */
+body.relic-h1-divider :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1) > *,
+body.relic-h2-divider :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2) > *,
+body.relic-h3-divider :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3) > *,
+body.relic-h4-divider :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4) > *,
+body.relic-h5-divider :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5) > *,
+body.relic-h6-divider :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) > * {
+  flex: 0 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+ * Alignment controls
+ * ----------------------------------------------------------------------- */
+
+body.relic-h1-left :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-left :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-left :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-left :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-left :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-left :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  text-align: left;
+}
+
+body.relic-h1-center :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-center :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-center :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-center :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-center :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-center :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  text-align: center;
+}
+
+/* Underline is compact; centre the complete title-and-rule unit. */
+body.relic-h1-center.relic-h1-underline :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-center.relic-h2-underline :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-center.relic-h3-underline :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-center.relic-h4-underline :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-center.relic-h5-underline :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-center.relic-h6-underline :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  margin-inline: auto;
+}
+
+/* Centre the complete Chevron treatment when requested. */
+body.relic-h1-center.relic-h1-separator :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1),
+body.relic-h2-center.relic-h2-separator :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2),
+body.relic-h3-center.relic-h3-separator :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3),
+body.relic-h4-center.relic-h4-separator :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4),
+body.relic-h5-center.relic-h5-separator :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5),
+body.relic-h6-center.relic-h6-separator :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  margin-inline: auto;
+}
+
+/* Optional stepped hierarchy. Centred headings deliberately remain centred. */
+body.relic-header-indent.relic-h2-left :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2) {
+  margin-inline-start: var(--relic-header-indent-step);
+}
+
+body.relic-header-indent.relic-h3-left :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3) {
+  margin-inline-start: calc(var(--relic-header-indent-step) * 2);
+}
+
+body.relic-header-indent.relic-h4-left :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4) {
+  margin-inline-start: calc(var(--relic-header-indent-step) * 3);
+}
+
+body.relic-header-indent.relic-h5-left :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5) {
+  margin-inline-start: calc(var(--relic-header-indent-step) * 4);
+}
+
+body.relic-header-indent.relic-h6-left :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6) {
+  margin-inline-start: calc(var(--relic-header-indent-step) * 5);
+}
+
+body.relic-h1-center.relic-h1-divider :is(.markdown-rendered h1, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-1)::before,
+body.relic-h2-center.relic-h2-divider :is(.markdown-rendered h2, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-2)::before,
+body.relic-h3-center.relic-h3-divider :is(.markdown-rendered h3, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-3)::before,
+body.relic-h4-center.relic-h4-divider :is(.markdown-rendered h4, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-4)::before,
+body.relic-h5-center.relic-h5-divider :is(.markdown-rendered h5, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-5)::before,
+body.relic-h6-center.relic-h6-divider :is(.markdown-rendered h6, .markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-header-6)::before {
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(to left, currentColor, transparent);
+  clip-path: none;
+  opacity: 0.62;
+}
