@@ -1300,15 +1300,15 @@ body {
 }
 
 /*
- * Keep list markers, indentation guides, and list text in the same wrapping
- * box. Without a formatting context, themes can leave the guide behind the
- * image while shifting only the list text alongside it.
+ * Keep lists in the ordinary float-aware flow. A separate formatting context
+ * would make the entire list avoid the image and remain narrow even after the
+ * text has passed below it.
  */
 .markdown-rendered:has(
     img[alt*="reference-left"],
     img[alt*="reference-right"]
   ) :is(ul, ol) {
-  display: flow-root;
+  display: block;
 }
 
 @media (max-width: 600px) {
